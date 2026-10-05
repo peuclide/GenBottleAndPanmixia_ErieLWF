@@ -114,6 +114,13 @@ lowAbun2End<- (2025-1995)/4
 LittleIceAgeStart <- (2025-1570)/4
 LittleIceAgeEnd <- (2025-1900)/4
 
+ErieB1 <- 113
+ErieB2 <- 115
+ErieB3 <- 75
+ErieB4 <- 77
+ErieB5 <- 21
+ErieB6 <- 27
+
 #### Plot of NE
 
 # Plot replicate-level Ne values with lake-specific point shapes
@@ -124,6 +131,9 @@ p2 <- ggplot(combinedg2.2, aes(x = Generation, y = Ne_diploids, shape = lake)) +
   geom_vline(xintercept = early_fishing, linetype=2)+
   geom_rect(aes(xmin = lowAbun1Start, xmax = lowAbun1End, ymin = 0, ymax = Inf), fill = "gray", alpha =.025, color =NA)+
   geom_rect(aes(xmin = lowAbun2Start, xmax = lowAbun2End, ymin = 0, ymax = Inf), fill = "gray", alpha =.025, color =NA)+
+  # geom_rect(aes(xmin = ErieB1, xmax = ErieB2, ymin = 0, ymax = Inf), fill = "blue", alpha =.025, color =NA)+
+  # geom_rect(aes(xmin = ErieB3, xmax = ErieB4, ymin = 0, ymax = Inf), fill = "blue", alpha =.025, color =NA)+
+  # geom_rect(aes(xmin = ErieB5, xmax = ErieB6, ymin = 0, ymax = Inf), fill = "blue", alpha =.025, color =NA)+
   geom_point(size = .75, alpha = .75) +
   geom_line(data=Combinedsummaryg2, aes(x = Generation, y = meanNe, linetype = lake), color = "firebrick", alpha = .85, size = 1)+
   scale_y_log10(guide = "axis_logticks", labels = label_comma())+
@@ -131,8 +141,8 @@ p2 <- ggplot(combinedg2.2, aes(x = Generation, y = Ne_diploids, shape = lake)) +
   labs(x = "Generations Before Present", y = "Geometric Mean Ne", color = "Data")+
   theme_bw() +
   annotate("text", x = early_fishing+2, y = 1e+03, label = "Early Fishing", angle = 90)+
-  annotate("text", x = lowAbun1Start-(lowAbun1Start-lowAbun1End)/2, y = 1e+03, label = "1st Decline", angle = 90)+
-  annotate("text", x = lowAbun2Start-(lowAbun2Start-lowAbun2End)/2, y = 1e+03, label = "2nd Decline", angle = 90)+
+  annotate("text", x = lowAbun1Start-(lowAbun1Start-lowAbun1End)/2, y = 1e+03, label = "Early Decline", angle = 90)+
+  annotate("text", x = lowAbun2Start-(lowAbun2Start-lowAbun2End)/2, y = 1e+03, label = "Late Decline", angle = 90)+
   labs(color = "Locus-set", shape = "Lake Point Estimate", linetype = "Lake Mean")+
   theme(text = element_text(size = 10),
         axis.title = element_text(size = 14),
@@ -143,7 +153,7 @@ p2 <- ggplot(combinedg2.2, aes(x = Generation, y = Ne_diploids, shape = lake)) +
   )
 p2
 
-# ggsave("./Figure_3_GONE_ne_Huron+Erie_g2.tiff", width = 10, height = 5, units = "in")
+ ggsave("../EA_submission/Figure_3_GONE_ne_Huron+Erie_g2.tiff", width = 10, height = 5, units = "in")
 
 # ggsave("./Figure_3_GONE_ne_Huron+Erie_g2.png", width = 10, height = 5, units = "in")
 

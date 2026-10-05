@@ -4,7 +4,7 @@ library(readxl)
 library(ggmap)
 library(ggrepel)
 library(sf) #used to work with spatial features once they are in R
-library(rgdal) #used to read spatial features into R
+#library(rgdal) #used to read spatial features into R
 library(ggsci)
 library(leaflet)
 library(arcpullr)
@@ -52,10 +52,10 @@ Inset <- ggplot()+
   labs(x = "Longitude", y = "Latitude")+
   scale_color_aaas()+
   theme_classic()+
-  theme(axis.text = element_text(size = 14, angle = 45, hjust = 1),
-        axis.title = element_text(size = 16),
+  theme(axis.text = element_text(size = 22, angle = 45, hjust = 1),
+        axis.title = element_text(size = 25),
         legend.position = "none")
-#ggsave("./Inset_p.tiff")
+ggsave("./Inset_p.tiff")
 
 
 
@@ -64,7 +64,7 @@ Inset <- ggplot()+
 
 Erie_p <- ggplot()+
   geom_sf(data = lakes_poly,fill = "gray")+
-  coord_sf( xlim = c(-84, -78),ylim = c(41, 43))+
+  coord_sf( xlim = c(-84, -78),ylim = c(41, 44))+
   geom_point(data = LWF_genetic_masterlist_p, aes(x = Longitude, y = Latitude), size = 3, alpha = .9)+
   geom_text_repel(data = LWF_genetic_masterlist_p, aes(x = Longitude, y = Latitude, label = WaterbodyName ), size = 3, point.padding = 10, min.segment.length=0, fontface="bold")+
   labs(x = "Longitude", y = "Latitude")+
@@ -77,6 +77,13 @@ ggsave("./Erie_p.tiff")
 #plot_layer(main_lakes)
 
 
+dat <- read.csv("./data/commercial_worksheet_Erie.csv")
 
+ggplot(dat, aes(x=Year, y = Grand.Total/1000))+
+  geom_line(linewidth = 1)+
+  scale_x_continuous(breaks = c(1850, 1875, 1900, 1925, 1950, 1975, 2000, 2025))+
+  theme_classic()+
+  labs(y="Catch (Millions of Lbs)")+
+  theme(text=element_text(size = 25))
 
 
